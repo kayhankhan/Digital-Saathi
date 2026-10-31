@@ -47,8 +47,9 @@ copies.
 
 ## Local Supabase configuration
 
-Create `supabase-config.local.js` in the repository root. Do not edit
-credentials into `supabase-client.js`.
+Create `supabase-config.local.js` beside `index.html` in the
+`digital-saathi-main/` app directory. Do not edit credentials into
+`supabase-client.js`.
 
 ```js
 window.DIGITAL_SAATHI_CONFIG = {
@@ -68,9 +69,19 @@ configuration, then `supabase-client.js`.
 
 ## Run locally
 
-From the repository root:
+From the repository root, start the server in the app directory.
+
+On Windows PowerShell:
+
+```powershell
+cd .\digital-saathi-main
+py -m http.server 8000
+```
+
+On macOS or Linux:
 
 ```bash
+cd digital-saathi-main
 python3 -m http.server 8000
 ```
 
@@ -108,9 +119,11 @@ dashboard. If email confirmation is enabled, signup shows a confirmation
 message and the confirmation link must return to the configured site URL.
 
 For local testing, add `http://localhost:8000` to Supabase Auth URL
-Configuration as both the Site URL (or use your deployed URL there) and an
-allowed redirect URL. The signup redirect is the current page URL with
-`#home`; add the deployed page URL as an allowed redirect when hosting the app.
+Configuration as an allowed redirect URL, and use it as the Site URL while
+testing locally. In production, set the Site URL and allowed redirect URL to
+the app's deployed URL. If the app remains in `digital-saathi-main/`, include
+that path in the deployed URL. The signup redirect is the current page URL
+with `#home`.
 
 Row Level Security must be enabled on every user-owned table. Policies must
 enforce that authenticated users can access only their own rows:
@@ -143,4 +156,3 @@ existing schema and deployment needs. Do not disable RLS to make the app work.
   support. No paid speech API or frontend API key is used.
 - Financial and health lessons are educational content, not financial or
   medical advice.
-# Digital-Saathi
