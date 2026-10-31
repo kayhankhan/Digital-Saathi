@@ -350,12 +350,19 @@ html[dir=rtl] .fixed.z-50{right:auto;left:.75rem;align-items:flex-start}
 .site-header{position:relative;z-index:10;width:min(100% - 1.5rem,1200px);margin:1rem auto;padding:.75rem 1rem;background:#fff;border:3px solid var(--b);border-radius:1.25rem;box-shadow:6px 6px 0 var(--b)}
 .site-header-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-width:0}
 .site-brand{border:0!important;box-shadow:none!important;background:transparent!important;color:inherit!important;font-size:1.5rem;font-weight:800;text-align:start;padding:.5rem!important;white-space:normal}
-.mobile-header-actions{display:none}
+.mobile-header-actions{display:flex;align-items:center;gap:.35rem;margin-inline-start:auto}
+.mobile-header-actions button{display:inline-flex;align-items:center;justify-content:center;min-height:44px;border:2px solid var(--b);border-radius:.75rem;background:#fff;color:#0B2A7A;font:inherit;font-weight:700;cursor:pointer}
+.mobile-header-actions .mobile-auth-link{padding:.4rem .55rem;white-space:nowrap}
+.mobile-header-actions .mobile-theme{width:44px;padding:.5rem}
+.mobile-header-actions .mobile-theme svg{width:20px;height:20px}
+.dark-mode .mobile-header-actions button{background:var(--surface);color:var(--text);border-color:var(--border)}
 .menu-toggle{display:none;min-width:48px;min-height:48px;padding:.5rem 1rem!important}
+.mobile-header-actions .menu-toggle{display:none}
 nav.site-nav-links{border:0;box-shadow:none;border-radius:0!important;background:transparent;color:inherit;margin-top:.5rem}
-.site-nav-links ul{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:.35rem;list-style:none;padding:0;margin:0}
+.site-nav-links ul{display:flex;flex-wrap:nowrap;align-items:center;justify-content:flex-end;gap:.35rem;list-style:none;padding:0;margin:0}
 .site-nav-links li{min-width:0}
 .site-nav-links button{min-height:44px;padding:.4rem .8rem;border:2px solid transparent!important;border-radius:.75rem;background:transparent;color:inherit;font:inherit;font-weight:650;cursor:pointer}
+.site-nav-links li.nav-login,.site-nav-links li.nav-account,.site-nav-links li.nav-theme{display:none}
 .site-nav-links button:hover,.site-nav-links button[aria-current=page]{background:#e8edff;color:#0B2A7A}
 .site-nav-links button.theme-toggle{border-color:var(--b)!important}
 .site-nav-links button.theme-toggle svg{display:block;width:20px;height:20px}
@@ -387,20 +394,13 @@ nav.site-nav-links{border:0;box-shadow:none;border-radius:0!important;background
  .site-header{padding:.5rem .65rem}
  .site-header-row{flex-wrap:nowrap;gap:.5rem}
  .site-brand{flex:0 1 auto;min-width:0;width:auto;padding:.25rem!important;font-size:1rem;line-height:1.2;white-space:nowrap}
- .menu-toggle{display:inline-flex;align-items:center;justify-content:center}
- .mobile-header-actions{display:flex;align-items:center;gap:.35rem;margin-inline-start:auto}
- .mobile-header-actions button{display:inline-flex;align-items:center;justify-content:center;min-height:44px;border:2px solid var(--b);border-radius:.75rem;background:#fff;color:#0B2A7A;font:inherit;font-weight:700;cursor:pointer}
- .mobile-header-actions .mobile-auth-link{padding:.4rem .55rem;white-space:nowrap}
- .mobile-header-actions .mobile-theme{width:44px;padding:.5rem}
- .mobile-header-actions .mobile-theme svg{width:20px;height:20px}
+ .mobile-header-actions .menu-toggle{display:inline-flex;align-items:center;justify-content:center}
  .mobile-header-actions .menu-toggle{min-width:44px;width:44px;padding:.5rem!important}
  nav.site-nav-links{display:none;margin-top:.5rem;padding:.5rem 0 0;border-top:1px solid #d5def5}
  nav.site-nav-links.is-open{display:block}
  .site-nav-links ul{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:.35rem}
  .site-nav-links li,.site-nav-links button{width:100%;min-width:0}
  .site-nav-links button{text-align:center;overflow-wrap:anywhere;white-space:normal;padding:.5rem}
- .site-nav-links li.nav-login,.site-nav-links li.nav-account,.site-nav-links li.nav-theme{display:none}
- .dark-mode .mobile-header-actions button{background:var(--surface);color:var(--text);border-color:var(--border)}
  .landing-content{padding:.75rem!important}
 }
 @media(max-width:480px){
