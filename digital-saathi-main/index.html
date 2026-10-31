@@ -386,17 +386,17 @@ nav.site-nav-links{border:0;box-shadow:none;border-radius:0!important;background
  .menu-toggle{display:inline-flex;align-items:center;justify-content:center}
  nav.site-nav-links{display:none;margin-top:.5rem;padding:.5rem 0 0;border-top:1px solid #d5def5}
  nav.site-nav-links.is-open{display:block}
- .site-nav-links ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.35rem}
+ .site-nav-links ul{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:.35rem}
  .site-nav-links li,.site-nav-links button{width:100%;min-width:0}
  .site-nav-links button{text-align:center;overflow-wrap:anywhere;white-space:normal;padding:.5rem}
- .site-nav-links li:last-child:nth-child(odd){grid-column:1/-1}
+ .site-nav-links li.nav-account{order:-2}
+ .site-nav-links li.nav-theme{order:-1}
  .landing-content{padding:.75rem!important}
 }
 @media(max-width:480px){
  .site-brand{font-size:1.2rem}
  .site-header{width:calc(100% - 1rem);margin:.5rem auto}
- .site-nav-links ul{grid-template-columns:minmax(0,1fr)}
- .site-nav-links li:last-child:nth-child(odd){grid-column:auto}
+ .site-nav-links ul{grid-template-columns:repeat(2,minmax(0,1fr))}
  .landing-content .card h1{padding:.15em .25em!important}
  .landing-content .card h1 .hero-title-word{font-size:clamp(1.75rem,10vw,3rem)!important}
  .site-footer{width:calc(100% - 1rem);font-size:.9rem}
@@ -469,7 +469,7 @@ const Ring=({p,s=110})=>{const r=s/2-9,cf=2*Math.PI*r;return html`<svg width=${s
 const Bar=({p})=>html`<div className="h-3 rounded-full bg-white border-2 border-[#0B2A7A] overflow-hidden"><div className="h-full rounded-full bg-black" style=${{width:p+'%'}}/></div>`;
 const Badge=({children})=>html`<span className="ui text-sm font-bold px-3 py-1 rounded-full border-2 border-[#0B2A7A] text-black bg-white">${children}</span>`;
 
-function SiteNav({go,route,auth,lang,darkMode,toggleDark}){const[open,setOpen]=useState(false);const navigate=next=>{setOpen(false);go(next)};return html`<header className="site-header ui"><div className="site-header-row"><button className="site-brand" onClick=${()=>navigate('welcome')}>Digital Saathi</button><button type="button" className="menu-toggle ui rounded-xl border-2 border-[#0B2A7A] bg-white font-bold" aria-label=${open?'Close navigation menu':'Open navigation menu'} aria-expanded=${open} aria-controls="primary-navigation" onClick=${()=>setOpen(!open)}><span aria-hidden="true">${open?'×':'☰'}</span><span className="sr-only">${open?'Close menu':'Menu'}</span></button></div><nav id="primary-navigation" aria-label="Primary" className=${'site-nav-links '+(open?'is-open':'')}><ul>${NAV.map(([k,,name])=>html`<li key=${k}><button onClick=${()=>navigate(k)} aria-current=${route===k?'page':undefined}>${lang==='ur'&&UR[k]?UR[k]:name}</button></li>`)}${!auth.user&&html`<li><button onClick=${()=>navigate('login')}>Log in</button></li><li><button onClick=${()=>navigate('signup')}>Sign up</button></li>`}${auth.user&&html`<li><button onClick=${()=>{setOpen(false);auth.signOut()}} disabled=${auth.busy}>Sign out</button></li>`}<li><button type="button" className="theme-toggle" aria-pressed=${!!darkMode} onClick=${toggleDark}>${darkMode?'Light mode':'Dark mode'}</button></li></ul></nav></header>`}
+function SiteNav({go,route,auth,lang,darkMode,toggleDark}){const[open,setOpen]=useState(false);const navigate=next=>{setOpen(false);go(next)};return html`<header className="site-header ui"><div className="site-header-row"><button className="site-brand" onClick=${()=>navigate('welcome')}>Digital Saathi</button><button type="button" className="menu-toggle ui rounded-xl border-2 border-[#0B2A7A] bg-white font-bold" aria-label=${open?'Close navigation menu':'Open navigation menu'} aria-expanded=${open} aria-controls="primary-navigation" onClick=${()=>setOpen(!open)}><span aria-hidden="true">${open?'×':'☰'}</span><span className="sr-only">${open?'Close menu':'Menu'}</span></button></div><nav id="primary-navigation" aria-label="Primary" className=${'site-nav-links '+(open?'is-open':'')}><ul>${NAV.map(([k,,name])=>html`<li key=${k}><button onClick=${()=>navigate(k)} aria-current=${route===k?'page':undefined}>${lang==='ur'&&UR[k]?UR[k]:name}</button></li>`)}${!auth.user&&html`<li><button onClick=${()=>navigate('login')}>Log in</button></li><li className="nav-account"><button onClick=${()=>navigate('signup')}>Sign up</button></li>`}${auth.user&&html`<li className="nav-account"><button onClick=${()=>{setOpen(false);auth.signOut()}} disabled=${auth.busy}>Sign out</button></li>`}<li className="nav-theme"><button type="button" className="theme-toggle" aria-pressed=${!!darkMode} onClick=${toggleDark}>${darkMode?'Light mode':'Dark mode'}</button></li></ul></nav></header>`}
 function SiteFooter(){return html`<footer className="site-footer ui">© 2026 Digital Saathi. All rights reserved.</footer>`}
 
 const speechAvailable=()=>typeof window!=='undefined'&&typeof window.speechSynthesis!=='undefined'&&typeof window.SpeechSynthesisUtterance!=='undefined';
