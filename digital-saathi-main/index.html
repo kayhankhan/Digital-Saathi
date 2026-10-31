@@ -370,7 +370,7 @@ const A=el=>{const v=el.getAttribute('aria-label');if(!v)return;const rec=store.
 const walk=n=>{if(n.nodeType===3){T(n);return}if(n.nodeType===1){if(n.hasAttribute('aria-label'))A(n);n.childNodes.forEach(walk)}};
 walk(root);const mo=new MutationObserver(ms=>{for(const m of ms){if(m.type==='characterData')T(m.target);else if(m.type==='attributes')A(m.target);else m.addedNodes.forEach(walk)}});
 mo.observe(root,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['aria-label']});return()=>mo.disconnect()},[lang])}
-const CATS=['All','Technology Basics','Everyday Apps','Digital Safety','Financial Literacy','Smart Health','Creative Arts'];
+const CATS=['All','Technology Basics','Everyday Apps','Digital Safety','Financial Literacy','Smart Health'];
 const G={'app':'A program on your phone, like WhatsApp.','icon':'A small picture you tap to open something.','link':'Blue text that opens a web page when tapped.','OTP':'A secret code sent to your phone. Never share it.'};
 const L=[
 {id:'call',t:'How to Make a Video Call',cat:'Technology Basics',lv:'Beginner',min:8,ic:'VC',d:'See and talk to family from anywhere.',steps:[
@@ -507,7 +507,7 @@ function Quiz({l,done}){const{up,st,set}=useContext(C);const questions=Array.isA
 const U=set.lang==='ur',T=x=>U?tr(x):x;
 useEffect(()=>{if(!q||!set.voice||U||fin)return;speak(T(q.q)+'. '+q.o.map((o,k)=>(k+1)+'. '+T(o)).join('. '));return()=>{stopSpeech()}},[i,fin,q,set.voice,U]);
 const pick=k=>{if(!q||a!==null)return;setA(k);if(k===q.a)setSc(s=>s+1);if(set.voice&&!U)speak(T(k===q.a?'Correct!':'Not quite.')+'. '+T(q.e))};
-const next=()=>{if(!q)return;if(i+1<questions.length){setI(i+1);setA(null)}else{const finalScore=sc+(a===q.a?1:0);setSc(finalScore);setFin(true);up('scores',{...st.scores,[l.id]:[finalScore,questions.length]})}};
+const next=()=>{if(!q)return;if(i+1<questions.length){setI(i+1);setA(null)}else{const finalScore=sc;setSc(finalScore);setFin(true);up('scores',{...st.scores,[l.id]:[finalScore,questions.length]})}};
 if(!questions.length||!q)return html`<${Card} c="space-y-4"><h2 className="text-2xl font-bold">Quiz unavailable</h2><p>There are no questions available for this tutorial yet.</p><${Btn} onClick=${done}>Back to Dashboard</${Btn}></${Card}>`;
 if(fin)return html`<${Card} c="text-center space-y-4"><h2 className="text-3xl font-bold">You scored ${sc} of ${questions.length}</h2><p className="text-xl">Well done for finishing. Every try builds confidence.</p><div className="flex flex-wrap gap-3 justify-center"><${Btn} v="s" onClick=${()=>{setI(0);setA(null);setSc(0);setFin(false)}}>Retry Quiz</${Btn}><${Btn} onClick=${done}>Back to Dashboard</${Btn}></div></${Card}>`;
 return html`<${Card} c="space-y-4"><p className="ui font-bold text-[#000000]">Question ${i+1} of ${questions.length}</p><h2 className="text-2xl font-bold">${q.q}</h2>

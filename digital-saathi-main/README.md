@@ -11,7 +11,7 @@ guidance, accessible text, and optional Urdu support.
 - Six built-in beginner lessons covering video calls, scam messages,
   passwords, smartphone navigation, savings, and healthy walking.
 - Lesson filtering by category, including technology basics, everyday apps,
-  digital safety, financial literacy, smart health, and creative arts.
+  digital safety, financial literacy, and smart health.
 - Guided lesson steps with explanations, progress state, quizzes, results,
   retry, and resume support.
 - English and Urdu interface options, adjustable text size, high-contrast
@@ -31,8 +31,9 @@ guidance, accessible text, and optional Urdu support.
 
 ## Technology and architecture
 
-This is a static, single-page frontend. There is no build step or package
-manager configuration in the repository.
+This is a static, single-page frontend. Vercel runs a small Node.js build
+script to create the ignored browser config from environment variables; the
+app itself has no package manager dependencies.
 
 - HTML, CSS, and JavaScript in `index.html`.
 - React 18, ReactDOM, HTM, Tailwind CSS, Google Fonts, and Supabase JS loaded
@@ -66,6 +67,23 @@ other secret key in this browser app.
 must never be committed, pasted into issues or pull requests, or included in
 screenshots. The page loads the Supabase CDN script first, then the local
 configuration, then `supabase-client.js`.
+
+### Configure Supabase on Vercel
+
+In the Vercel project settings, add these environment variables for Production
+(and Preview/Development if you use those environments):
+
+- `SUPABASE_URL`: your Supabase project URL, such as
+  `https://YOUR_PROJECT_REF.supabase.co`
+- `SUPABASE_PUBLISHABLE_KEY`: the public key beginning with
+  `sb_publishable_`
+
+The Vercel build writes these values into the ignored
+`supabase-config.local.js` file. Do not use a `service_role` or secret key.
+After saving the variables, redeploy so the config is generated. Then add the
+deployed Vercel URL to Supabase Auth's allowed redirect URLs and set the
+production Site URL. Database synchronization also requires the tables and
+Row Level Security policies described below.
 
 ## Run locally
 
@@ -121,9 +139,9 @@ message and the confirmation link must return to the configured site URL.
 For local testing, add `http://localhost:8000` to Supabase Auth URL
 Configuration as an allowed redirect URL, and use it as the Site URL while
 testing locally. In production, set the Site URL and allowed redirect URL to
-the app's deployed URL. If the app remains in `digital-saathi-main/`, include
-that path in the deployed URL. The signup redirect is the current page URL
-with `#home`.
+the app's Vercel URL at its root (the Vercel project root is
+`digital-saathi-main/`, so that folder is not part of the deployed path). The
+signup redirect is the current page URL with `#home`.
 
 Row Level Security must be enabled on every user-owned table. Policies must
 enforce that authenticated users can access only their own rows:

@@ -56,7 +56,7 @@
     const [profile, tutorials, quizQuestions, progress, attempts, reminders] = await Promise.all([
       client.from(TABLES.profiles).select('*').eq('id', userId).limit(1),
       client.from(TABLES.tutorials).select('*').eq('is_published', true),
-      client.from(TABLES.quizQuestions).select('*').eq('is_published', true),
+      client.from(TABLES.quizQuestions).select('*'),
       client.from(TABLES.progress).select('*').eq('user_id', userId),
       client.from(TABLES.attempts).select('*').eq('user_id', userId),
       client.from(TABLES.reminders).select('*').eq('user_id', userId)
