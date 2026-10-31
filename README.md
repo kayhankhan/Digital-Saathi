@@ -13,7 +13,8 @@ Urdu-language support.
   navigation, savings, and healthy walking.
 - Practice activities and quizzes with progress tracking.
 - English and Urdu interface options, adjustable text size, high contrast,
-  read-aloud controls, and supported-browser voice commands.
+  dark mode, read-aloud controls, and supported-browser voice commands.
+- Responsive navigation with account actions and mobile-friendly layouts.
 - Safety Center with a fictional scam-message example.
 - Local-first storage, with optional Supabase accounts and cross-device
   progress synchronization.

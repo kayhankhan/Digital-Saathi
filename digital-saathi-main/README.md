@@ -15,8 +15,10 @@ guidance, accessible text, and optional Urdu support.
 - Guided lesson steps with explanations, progress state, quizzes, results,
   retry, and resume support.
 - English and Urdu interface options, adjustable text size, high-contrast
-  styling, English voice guidance, read-aloud controls, and supported-browser
-  voice commands.
+  styling, dark mode, English voice guidance, read-aloud controls, and
+  supported-browser voice commands.
+- Responsive navigation with sign-in/sign-up links and layouts adapted for
+  mobile screens.
 - Practice activities for a video call, an online form, and timed learning
   sessions. The practice activities are simulations and do not access real
   accounts, cameras, microphones, or external services.
@@ -160,8 +162,9 @@ existing schema and deployment needs. Do not disable RLS to make the app work.
 
 ## Known limitations
 
-- The app has no automated test suite or production build pipeline; browser
-  testing is still needed across supported devices.
+- The app has no automated test suite; its production build compiles the
+  Tailwind stylesheet, and browser testing is still needed across supported
+  devices.
 - Supabase synchronization depends on the project URL, publishable key,
   authentication settings, matching columns, and correct RLS policies.
 - The app falls back to local storage, but cloud/local conflict resolution is
