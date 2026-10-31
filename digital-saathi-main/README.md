@@ -82,10 +82,10 @@ The Vercel build writes these values into the ignored
 `supabase-config.local.js` file. Do not use a `service_role` or secret key.
 After saving the variables, redeploy so the config is generated. In Supabase
 Auth URL Configuration, set the production Site URL to
-`https://digital-saathi-digital-saathi-main.vercel.app` and add that URL as an
-allowed redirect URL (or use `https://digital-saathi-digital-saathi-main.vercel.app/**`
-if matching hash-based redirects). Database synchronization also requires the
-tables and Row Level Security policies described below.
+`https://digital-saathi-pk.vercel.app` and add
+`https://digital-saathi-pk.vercel.app/**` as an allowed redirect URL.
+Database synchronization also requires the tables and Row Level Security
+policies described below.
 
 ## Run locally
 
