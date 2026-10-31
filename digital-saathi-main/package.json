@@ -1,0 +1,10 @@
+{
+  "name": "digital-saathi",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/generate-supabase-config.js && tailwindcss -i ./src/tailwind.css -o ./tailwind.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.17"
+  }
+}

@@ -31,13 +31,13 @@ guidance, accessible text, and optional Urdu support.
 
 ## Technology and architecture
 
-This is a static, single-page frontend. Vercel runs a small Node.js build
-script to create the ignored browser config from environment variables; the
-app itself has no package manager dependencies.
+This is a static, single-page frontend. Vercel runs a Node.js build that
+generates the ignored Supabase browser config from environment variables and
+builds the minified Tailwind stylesheet.
 
 - HTML, CSS, and JavaScript in `index.html`.
-- React 18, ReactDOM, HTM, Tailwind CSS, Google Fonts, and Supabase JS loaded
-  from CDNs in `index.html`.
+- React 18, ReactDOM, HTM, Google Fonts, and Supabase JS loaded from CDNs in
+  `index.html`; Tailwind CSS is generated locally during the build.
 - `supabase-client.js` creates the browser Supabase client.
 - `supabase-data.js` reads and writes the existing Supabase tables.
 - React state and `localStorage` provide the local-first fallback.
@@ -80,10 +80,12 @@ In the Vercel project settings, add these environment variables for Production
 
 The Vercel build writes these values into the ignored
 `supabase-config.local.js` file. Do not use a `service_role` or secret key.
-After saving the variables, redeploy so the config is generated. Then add the
-deployed Vercel URL to Supabase Auth's allowed redirect URLs and set the
-production Site URL. Database synchronization also requires the tables and
-Row Level Security policies described below.
+After saving the variables, redeploy so the config is generated. In Supabase
+Auth URL Configuration, set the production Site URL to
+`https://digital-saathi-digital-saathi-main.vercel.app` and add that URL as an
+allowed redirect URL (or use `https://digital-saathi-digital-saathi-main.vercel.app/**`
+if matching hash-based redirects). Database synchronization also requires the
+tables and Row Level Security policies described below.
 
 ## Run locally
 
